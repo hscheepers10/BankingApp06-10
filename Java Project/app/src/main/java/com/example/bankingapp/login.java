@@ -4,17 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.BreakIterator;
+
+import static com.example.bankingapp.R.id.emailET;
+
 public class login extends AppCompatActivity {
 
     private TextView here;
     private Button logInBtn;
-    private EditText emailET,passwordET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,6 @@ public class login extends AppCompatActivity {
         //On click listener for registration activity.
         here = (TextView)findViewById(R.id.regHereTV);
         here.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Intent hereIntent = new Intent(login.this,register.class);
@@ -32,15 +35,54 @@ public class login extends AppCompatActivity {
             }
         });
 
-
-
+        /////////////////////LOG IN BUTTON //////////////////////////
         logInBtn = (Button)findViewById(R.id.loginBtn);
         logInBtn.setOnClickListener(new View.OnClickListener() {
-            
+
             @Override
             public void onClick(View view) {
-                Intent logInIntent = new Intent(login.this,home.class);
-                startActivity(logInIntent);
+                EditText emailET = findViewById(R.id.emailET);
+                EditText passwordET = findViewById(R.id.passwordET);
+
+                String email = emailET.getText().toString().trim();
+                String pswd = passwordET.getText().toString().trim();
+
+                if (pswd.length() < 5 || pswd.isEmpty()){
+                    
+                }
+
+
+
+//                if (pswd.length() < 6) {
+//                    passwordET.setError("Password must contain 6  characters");
+//                    passwordET.requestFocus();
+//                }
+//
+//                if (TextUtils.isEmpty(pswd)) {
+//                    passwordET.setError("Please enter Password");
+//                    passwordET.requestFocus();
+//                }
+//
+//                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                    emailET.setError("Please enter Valid email");
+//                    emailET.requestFocus();
+//                }
+//
+//                if (TextUtils.isEmpty(email)) {
+//                    emailET.setError("Please enter Usee Name");
+//                    emailET.requestFocus();
+//                }
+//
+//                if (!TextUtils.isEmpty(email) &&
+//                        pswd.length() >= 6 &&
+//                        Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
+//                        !TextUtils.isEmpty(pswd)) {
+//
+//                    Intent logInIntent = new Intent(login.this,home.class);
+//                    startActivity(logInIntent);
+//                }
+
+
             }
         });
     }
