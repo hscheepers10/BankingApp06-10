@@ -7,7 +7,7 @@
     tools:context=".register">
 
     <EditText
-        android:id="@+id/eMailET"
+        android:id="@+id/eMailRegET"
         android:layout_width="600px"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -19,16 +19,16 @@
         app:layout_constraintTop_toBottomOf="@+id/lNameET4" />
 
     <EditText
-        android:id="@+id/passwordET"
+        android:id="@+id/passwordRegET"
         android:layout_width="600px"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eMailET" />
+        app:layout_constraintTop_toBottomOf="@+id/eMailRegET" />
 
     <TextView
         android:id="@+id/regTV"
@@ -64,7 +64,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegET" />
 
     <EditText
         android:id="@+id/lNameET4"
@@ -99,6 +99,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
+            android:id="@+id/radGroup"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -109,21 +110,19 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                android:id="@+id/radio_pirates"
+                android:id="@+id/radMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male" />
 
             <RadioButton
-                android:id="@+id/radio_ninjas"
+                android:id="@+id/radFem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Female" />
 
 
-
         </RadioGroup>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -132,7 +131,7 @@
         android:id="@+id/createAccBtn"
         android:layout_width="600px"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         android:text="Create Account"
         android:textColor="@android:color/white"

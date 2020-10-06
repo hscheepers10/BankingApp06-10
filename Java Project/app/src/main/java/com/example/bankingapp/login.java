@@ -43,6 +43,7 @@ public class login extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+
                 EditText emailET = findViewById(R.id.emailET);
                 EditText passwordET = findViewById(R.id.passwordET);
 
@@ -61,12 +62,13 @@ public class login extends AppCompatActivity {
                 
                 else{
                     Toast loggedInToast = Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT);
+                    loggedInToast.show();
                     emailET.setText(null);
                     passwordET.setText(null);
-                    loggedInToast.show();
+
+                    //Intent.
                     Intent logInIntent = new Intent(login.this,home.class);
                     startActivity(logInIntent);
-
                 }
             }
         });
