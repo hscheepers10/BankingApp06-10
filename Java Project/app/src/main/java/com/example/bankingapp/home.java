@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.strictmode.IntentReceiverLeakedViolation;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class home extends AppCompatActivity {
     private Button viewBtn,transBtn,logoutBtn;
@@ -38,6 +39,8 @@ public class home extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast logOutToast =Toast.makeText(getApplicationContext(),"Successfully logged out.  ",Toast.LENGTH_SHORT);
+                logOutToast.show();
                 finish();
             }
         });

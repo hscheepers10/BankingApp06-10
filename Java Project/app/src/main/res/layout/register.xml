@@ -108,20 +108,16 @@
             app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintStart_toEndOf="@+id/genderTV"
             app:layout_constraintTop_toTopOf="parent">
-
             <RadioButton
                 android:id="@+id/radMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Male" />
-
             <RadioButton
                 android:id="@+id/radFem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Female" />
-
-
         </RadioGroup>
 
 

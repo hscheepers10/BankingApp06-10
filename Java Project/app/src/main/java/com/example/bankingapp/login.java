@@ -61,14 +61,14 @@ public class login extends AppCompatActivity {
                 }
                 
                 else{
+                    //Intent.
+                    Intent logInIntent = new Intent(login.this,home.class);
+                    startActivity(logInIntent);
+
                     Toast loggedInToast = Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT);
                     loggedInToast.show();
                     emailET.setText(null);
                     passwordET.setText(null);
-
-                    //Intent.
-                    Intent logInIntent = new Intent(login.this,home.class);
-                    startActivity(logInIntent);
                 }
             }
         });
