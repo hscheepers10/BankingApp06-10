@@ -39,8 +39,6 @@ public class register extends AppCompatActivity {
         radGroup1 = (RadioGroup)findViewById(R.id.radGroup);
         createAcc.setOnClickListener(new View.OnClickListener() {
 
-
-
             @Override
             public void onClick(View view) {
 
@@ -60,22 +58,33 @@ public class register extends AppCompatActivity {
                 int radGrpId = radGroup1.getCheckedRadioButtonId();
                 radioButton1 = (RadioButton)findViewById(radGrpId);
 
-
+                //Fields are tested as to not be empty.
                 if (passwordReg.isEmpty() || emailReg.isEmpty() || fName.isEmpty() || lName.isEmpty() || mobile.isEmpty()){
                     Toast emptyToast = Toast.makeText(getApplicationContext(),"Empty fields",Toast.LENGTH_SHORT);
                     emptyToast.show();
                 }
 
+                //The mobile number EditText is automatically checked for numbers only data because
+                //the "mobileET" EditText in "register.xml" file is set to number.
+
+                //Email address is checked by the Patterns matcher class.  And Password should be more that 5 characters.
+                //The password is automatically hidden due to it being set to hidden in xml.
                 else if (passwordReg.length()<5 || !Patterns.EMAIL_ADDRESS.matcher(emailReg).matches()){
                     Toast incorrectToast = Toast.makeText(getApplicationContext(),"incorrect fields",Toast.LENGTH_SHORT);
                     incorrectToast.show();
                 }
 
                 else{
-                    Toast loggedInToast = Toast.makeText(getApplicationContext(),"all good and radioButton is:",Toast.LENGTH_SHORT);
-                    loggedInToast.show();
+                    //Create account on SQLite. //Create two variables used to store values for current account and savings account.
 
-                    //Intent.
+                    //Check if email isn't already registered.
+
+                    //Intent. finishes the activity if successful.
+                    finish();
+
+                    //Toast.
+                    Toast createdToast = Toast.makeText(getApplicationContext(),"User Account successfully created.  xD",Toast.LENGTH_SHORT);
+                    createdToast.show();  //To be removed upon implementing DB.
 
                 }
             }
