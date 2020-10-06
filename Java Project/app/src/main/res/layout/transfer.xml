@@ -106,11 +106,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/transferBtn"
         android:layout_width="650px"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Button"
+        android:text="Transfer"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
