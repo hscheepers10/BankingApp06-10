@@ -14,6 +14,7 @@
         <activity android:name=".home" />
         <activity android:name=".register" />
         <activity
+
             android:name=".login"
             android:theme="@style/loginTheme">
             <intent-filter>

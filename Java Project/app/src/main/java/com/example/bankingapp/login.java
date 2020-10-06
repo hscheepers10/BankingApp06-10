@@ -18,6 +18,7 @@ public class login extends AppCompatActivity {
 
         here = (TextView)findViewById(R.id.regHereTV);
         here.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(login.this,register.class);
