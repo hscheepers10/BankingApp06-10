@@ -112,13 +112,13 @@
                 android:id="@+id/radio_pirates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Male"></RadioButton>
+                android:text="Male" />
 
             <RadioButton
                 android:id="@+id/radio_ninjas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Female"></RadioButton>
+                android:text="Female" />
 
 
 
