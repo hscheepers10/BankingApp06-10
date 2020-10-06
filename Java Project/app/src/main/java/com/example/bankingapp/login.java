@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.BreakIterator;
 
+import static com.example.bankingapp.R.id.content;
 import static com.example.bankingapp.R.id.emailET;
 
 public class login extends AppCompatActivity {
@@ -47,42 +49,25 @@ public class login extends AppCompatActivity {
                 String email = emailET.getText().toString().trim();
                 String pswd = passwordET.getText().toString().trim();
 
-                if (pswd.length() < 5 || pswd.isEmpty()){
-                    
+                if (pswd.isEmpty() || email.isEmpty()){
+                    Toast emptyToast = Toast.makeText(getApplicationContext(),"Empty fields",Toast.LENGTH_SHORT);
+                    emptyToast.show();
                 }
+                
+                else if (pswd.length()<5 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Toast incorrectToast = Toast.makeText(getApplicationContext(),"incorrect fields",Toast.LENGTH_SHORT);
+                    incorrectToast.show();
+                }
+                
+                else{
+                    Toast loggedInToast = Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT);
+                    emailET.setText(null);
+                    passwordET.setText(null);
+                    loggedInToast.show();
+                    Intent logInIntent = new Intent(login.this,home.class);
+                    startActivity(logInIntent);
 
-
-
-//                if (pswd.length() < 6) {
-//                    passwordET.setError("Password must contain 6  characters");
-//                    passwordET.requestFocus();
-//                }
-//
-//                if (TextUtils.isEmpty(pswd)) {
-//                    passwordET.setError("Please enter Password");
-//                    passwordET.requestFocus();
-//                }
-//
-//                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//                    emailET.setError("Please enter Valid email");
-//                    emailET.requestFocus();
-//                }
-//
-//                if (TextUtils.isEmpty(email)) {
-//                    emailET.setError("Please enter Usee Name");
-//                    emailET.requestFocus();
-//                }
-//
-//                if (!TextUtils.isEmpty(email) &&
-//                        pswd.length() >= 6 &&
-//                        Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-//                        !TextUtils.isEmpty(pswd)) {
-//
-//                    Intent logInIntent = new Intent(login.this,home.class);
-//                    startActivity(logInIntent);
-//                }
-
-
+                }
             }
         });
     }
