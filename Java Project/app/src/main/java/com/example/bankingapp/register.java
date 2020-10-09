@@ -19,13 +19,20 @@ public class register extends AppCompatActivity {
     private Button createAcc;
     private RadioGroup radGroup1;
     private RadioButton radioButton1;
+    EditText fNameET,lNameET,emailET,passwordET,mobileET;
+
+    //DB Helper
+    dbHelper myDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        myDB = new dbHelper(this);
+        //        addDt();
 
-        //Onclick listener returns to Login Page.
+        /////////////HERE ACTIVITY /////////////////
+        //Simply returns the user to the login page.
         here = (TextView) findViewById(R.id.logHereTV);
         here.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,22 +49,25 @@ public class register extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //Finding variables from XML Names.
+                EditText emailEt = findViewById(R.id.eMailRegET);
                 EditText fNameEt = findViewById(R.id.fNameET);
                 EditText lNameEt = findViewById(R.id.lNameET4);
-                EditText emailEt = findViewById(R.id.eMailRegET);
                 EditText passwordEt = findViewById(R.id.passwordRegET);
                 EditText mobileEt = findViewById(R.id.mobileET);
 
+                //Declaring variables, getting text,  and parsing to string.
+                String emailReg = emailEt.getText().toString().trim();
                 String fName = fNameEt.getText().toString().trim();
                 String lName = lNameEt.getText().toString().trim();
-                String emailReg = emailEt.getText().toString().trim();
                 String passwordReg = passwordEt.getText().toString().trim();
                 String mobile = mobileEt.getText().toString().trim();
 
-
+                //RadioButton being a nuisance.
                 int radGrpId = radGroup1.getCheckedRadioButtonId();
                 radioButton1 = (RadioButton)findViewById(radGrpId);
 
+                //Validation
                 //Fields are tested as to not be empty.
                 if (passwordReg.isEmpty() || emailReg.isEmpty() || fName.isEmpty() || lName.isEmpty() || mobile.isEmpty()){
                     Toast emptyToast = Toast.makeText(getApplicationContext(),"Empty fields",Toast.LENGTH_SHORT);
@@ -85,10 +95,29 @@ public class register extends AppCompatActivity {
                     //Toast.
                     Toast createdToast = Toast.makeText(getApplicationContext(),"User Account successfully created.  xD",Toast.LENGTH_SHORT);
                     createdToast.show();  //To be removed upon implementing DB.
-
                 }
+
+
             }
         });
 
+    }
+
+    //Method to add date when pressing Create account button.
+    public void addDt(){
+        createAcc.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        boolean isInserted = myDB.addData(emailET.getText().toString(),fNameET.getText().toString(),
+                                lNameET.getText().toString(),mobileET.getText().toString(),passwordET.getText().toString());
+                        if(isInserted = true){
+                            Toast.makeText(getApplicationContext(),"Data saved",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Data NOT saved !!!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
     }
 }
