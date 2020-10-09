@@ -19,7 +19,7 @@ public class register extends AppCompatActivity {
     private Button createAcc;
     private RadioGroup radGroup1;
     private RadioButton radioButton1;
-    EditText fNameET,lNameET,emailET,passwordET,mobileET;
+    EditText emailEt,fNameEt,lNameEt,passwordEt,mobileEt;
 
     //DB Helper
     dbHelper myDB;
@@ -29,7 +29,7 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         myDB = new dbHelper(this);
-        //        addDt();
+
 
         /////////////HERE ACTIVITY /////////////////
         //Simply returns the user to the login page.
@@ -67,6 +67,8 @@ public class register extends AppCompatActivity {
                 int radGrpId = radGroup1.getCheckedRadioButtonId();
                 radioButton1 = (RadioButton)findViewById(radGrpId);
 
+                //
+
                 //Validation
                 //Fields are tested as to not be empty.
                 if (passwordReg.isEmpty() || emailReg.isEmpty() || fName.isEmpty() || lName.isEmpty() || mobile.isEmpty()){
@@ -96,28 +98,14 @@ public class register extends AppCompatActivity {
                     Toast createdToast = Toast.makeText(getApplicationContext(),"User Account successfully created.  xD",Toast.LENGTH_SHORT);
                     createdToast.show();  //To be removed upon implementing DB.
                 }
-
-
+                myDB.addData(emailReg,fName, lName,passwordReg,mobile);
             }
         });
 
     }
 
     //Method to add date when pressing Create account button.
-    public void addDt(){
-        createAcc.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        boolean isInserted = myDB.addData(emailET.getText().toString(),fNameET.getText().toString(),
-                                lNameET.getText().toString(),mobileET.getText().toString(),passwordET.getText().toString());
-                        if(isInserted = true){
-                            Toast.makeText(getApplicationContext(),"Data saved",Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Data NOT saved !!!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-        );
-    }
+//    public void addDt(){
+//
+//    }
 }
