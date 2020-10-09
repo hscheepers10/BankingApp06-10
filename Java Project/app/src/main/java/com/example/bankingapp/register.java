@@ -19,7 +19,6 @@ public class register extends AppCompatActivity {
     private Button createAcc;
     private RadioGroup radGroup1;
     private RadioButton radioButton1;
-    EditText emailEt,fNameEt,lNameEt,passwordEt,mobileEt;
 
     //DB Helper
     dbHelper myDB;
@@ -29,7 +28,6 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
         myDB = new dbHelper(this);
-
 
         /////////////HERE ACTIVITY /////////////////
         //Simply returns the user to the login page.
@@ -98,14 +96,10 @@ public class register extends AppCompatActivity {
                     Toast createdToast = Toast.makeText(getApplicationContext(),"User Account successfully created.  xD",Toast.LENGTH_SHORT);
                     createdToast.show();  //To be removed upon implementing DB.
                 }
+
+                //Calling myDB instance of addData class in dbHelper class.
                 myDB.addData(emailReg,fName, lName,passwordReg,mobile);
             }
         });
-
     }
-
-    //Method to add date when pressing Create account button.
-//    public void addDt(){
-//
-//    }
 }
