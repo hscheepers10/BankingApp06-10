@@ -70,21 +70,25 @@ public class register extends AppCompatActivity {
                 //Validation
                 //Fields are tested as to not be empty.
                 if (passwordReg.isEmpty() || emailReg.isEmpty() || fName.isEmpty() || lName.isEmpty() || mobile.isEmpty()){
-                    Toast emptyToast = Toast.makeText(getApplicationContext(),"Empty fields",Toast.LENGTH_SHORT);
+                    Toast emptyToast = Toast.makeText(getApplicationContext(),"Please enter all of the fields to register! ",Toast.LENGTH_SHORT);
                     emptyToast.show();
                 }
 
                 //The mobile number EditText is automatically checked for numbers only data because
-                //the "mobileET" EditText in "register.xml" file is set to number.
-
-                //Email address is checked by the Patterns matcher class.  And Password should be more that 5 characters.
+                    //the "mobileET" EditText in "register.xml" file is set to number.
+                //Email address is checked by the Patterns matcher class.
+                //And Password should be more that 5 characters.
                 //The password is automatically hidden due to it being set to hidden in xml.
                 else if (passwordReg.length()<5 || !Patterns.EMAIL_ADDRESS.matcher(emailReg).matches()){
                     Toast incorrectToast = Toast.makeText(getApplicationContext(),"incorrect fields",Toast.LENGTH_SHORT);
                     incorrectToast.show();
                 }
 
+                //TODO Check if email is already registered.
+
                 else{
+
+                    //TODO use SQLite helper class to create a user in the Database.
                     //Create account on SQLite. //Create two variables used to store values for current account and savings account.
 
                     //Check if email isn't already registered.
@@ -92,13 +96,14 @@ public class register extends AppCompatActivity {
                     //Intent. finishes the activity if successful.
                     finish();
 
+                    //TODO create variables for (i) currentAcc and (ii) savingsAccount and insert any amount of money into each.
+
                     //Toast.
                     Toast createdToast = Toast.makeText(getApplicationContext(),"User Account successfully created.  xD",Toast.LENGTH_SHORT);
                     createdToast.show();  //To be removed upon implementing DB.
                 }
-
                 //Calling myDB instance of addData class in dbHelper class.
-                myDB.addData(emailReg,fName, lName,passwordReg,mobile);
+//                myDB.addData(emailReg,fName, lName,passwordReg,mobile);
             }
         });
     }

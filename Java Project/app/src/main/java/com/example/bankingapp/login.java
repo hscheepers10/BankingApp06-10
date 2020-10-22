@@ -54,27 +54,14 @@ public class login extends AppCompatActivity {
                     Toast emptyToast = Toast.makeText(getApplicationContext(),"Empty fields",Toast.LENGTH_SHORT);
                     emptyToast.show();
                 }
-                
+
+                //Validating password to be at least 5 characters long.
                 else if (pswd.length()<5 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     Toast incorrectToast = Toast.makeText(getApplicationContext(),"incorrect fields",Toast.LENGTH_SHORT);
                     incorrectToast.show();
                 }
-                
-                else{
-                    //Intent.
-                    Intent logInIntent = new Intent(login.this,home.class);
-                    startActivity(logInIntent);
-
-                    Toast loggedInToast = Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT);
-                    loggedInToast.show();
-                    emailET.setText(null);
-                    passwordET.setText(null);
-                }
-            }
-        });
-    }
-
-//    public boolean validate() {
+                //TODO Validate username password.
+                //    public boolean validate() {
 //        boolean valid = true;
 //
 //        String email = emailET.getText().toString();
@@ -96,4 +83,17 @@ public class login extends AppCompatActivity {
 //
 //        return valid;
 //    }
+                else{
+                    //Intent.
+                    Intent logInIntent = new Intent(login.this,home.class);
+                    startActivity(logInIntent);
+
+                    Toast loggedInToast = Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_SHORT);
+                    loggedInToast.show();
+                    emailET.setText(null);
+                    passwordET.setText(null);
+                }
+            }
+        });
+    }
 }
