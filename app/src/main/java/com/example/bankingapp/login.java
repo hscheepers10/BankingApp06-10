@@ -26,18 +26,9 @@ public class login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        final dbHelper sqliteHelper = new dbHelper(this);
 
-        //On click listener for registration activity.
-        here = (TextView)findViewById(R.id.regHereTV);
-        here.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent hereIntent = new Intent(login.this,register.class);
-                startActivity(hereIntent);
-            }
-        });
-
-        /////////////////////LOG IN BUTTON //////////////////////////
+        ///////////////////// LOG IN BUTTON //////////////////////////
         logInBtn = (Button)findViewById(R.id.loginBtn);
         logInBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -50,41 +41,23 @@ public class login extends AppCompatActivity {
                 String email = emailET.getText().toString().trim();
                 String pswd = passwordET.getText().toString().trim();
 
+                //Empty Password
                 if (pswd.isEmpty() || email.isEmpty()){
-                    Toast emptyToast = Toast.makeText(getApplicationContext(),"Empty fields",Toast.LENGTH_SHORT);
+                    Toast emptyToast = Toast.makeText(getApplicationContext(),"Fields are empty! ",Toast.LENGTH_SHORT);
                     emptyToast.show();
                 }
 
                 //Validating password to be at least 5 characters long.
                 else if (pswd.length()<5 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    Toast incorrectToast = Toast.makeText(getApplicationContext(),"incorrect fields",Toast.LENGTH_SHORT);
+                    Toast incorrectToast = Toast.makeText(getApplicationContext(),"Fields are incorrect! ",Toast.LENGTH_SHORT);
                     incorrectToast.show();
                 }
-                //TODO Validate username password.
-                //    public boolean validate() {
-//        boolean valid = true;
-//
-//        String email = emailET.getText().toString();
-//        String password = passwordET.getText().toString();
-//
-//        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            emailET.setError("enter a valid email address");
-//            valid = false;
-//        } else {
-//            emailET.setError(null);
-//        }
-//
-//        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-//            passwordET.setError("between 4 and 10 alphanumeric characters");
-//            valid = false;
-//        } else {
-//            passwordET.setError(null);
-//        }
-//
-//        return valid;
-//    }
-                else{
-                    //Intent.
+
+                userDetails currentUser = sqliteHelper.Authenticate(new userDetails(null, null,null, email, pswd,null,null,null,null));
+
+                //Check Authentication is successful or not
+                if (currentUser != null) {
+                    Toast.makeText(login.this,"Successfully logged in.",Toast.LENGTH_LONG).show();
                     Intent logInIntent = new Intent(login.this,home.class);
                     startActivity(logInIntent);
 
@@ -93,6 +66,21 @@ public class login extends AppCompatActivity {
                     emailET.setText(null);
                     passwordET.setText(null);
                 }
+                else{
+                    //Intent.
+                    Toast.makeText(login.this,"Unable to login. Invalid email or password.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        ////////////////////REGISTER ACTIVITY///////////////////////////
+        here = (TextView)findViewById(R.id.regHereTV);
+        here.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent hereIntent = new Intent(login.this,register.class);
+                startActivity(hereIntent);
+                finish(); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
         });
     }

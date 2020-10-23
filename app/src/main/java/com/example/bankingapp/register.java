@@ -13,13 +13,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import javax.microedition.khronos.egl.EGLDisplay;
+
 public class register extends AppCompatActivity {
 
     private TextView here;
+    private EditText firstname, lastname, email, password,mobile;
+
     private Button createAcc;
     private RadioGroup radGroup1;
-    private RadioButton radioButton1;
-
+    final dbHelper sqliteHelper = new dbHelper(this);
     //DB Helper
     dbHelper myDB;
 
@@ -27,32 +30,25 @@ public class register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        myDB = new dbHelper(this);
-
-        /////////////HERE ACTIVITY /////////////////
-        //Simply returns the user to the login page.
-        here = (TextView) findViewById(R.id.logHereTV);
-        here.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        myDB = new dbHelper(this);
 
         //////////////REGISTER ACTIVITY ////////////
         createAcc = (Button) findViewById(R.id.createAccBtn);
-        radGroup1 = (RadioGroup)findViewById(R.id.radGroup);
+//        radGroup1 = (RadioGroup)findViewById(R.id.radGroup);
         createAcc.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
                 //Finding variables from XML Names.
-                EditText emailEt = findViewById(R.id.eMailRegET);
+
                 EditText fNameEt = findViewById(R.id.fNameET);
                 EditText lNameEt = findViewById(R.id.lNameET4);
+                EditText emailEt = findViewById(R.id.eMailRegET);
                 EditText passwordEt = findViewById(R.id.passwordRegET);
                 EditText mobileEt = findViewById(R.id.mobileET);
+                RadioGroup radioButton = findViewById(R.id.radGroup);
+
 
                 //Declaring variables, getting text,  and parsing to string.
                 String emailReg = emailEt.getText().toString().trim();
@@ -62,8 +58,7 @@ public class register extends AppCompatActivity {
                 String mobile = mobileEt.getText().toString().trim();
 
                 //RadioButton being a nuisance.
-                int radGrpId = radGroup1.getCheckedRadioButtonId();
-                radioButton1 = (RadioButton)findViewById(radGrpId);
+//                int radGrpId = radGroup1.getCheckedRadioButtonId();
 
                 //
 
@@ -104,6 +99,16 @@ public class register extends AppCompatActivity {
                 }
                 //Calling myDB instance of addData class in dbHelper class.
 //                myDB.addData(emailReg,fName, lName,passwordReg,mobile);
+            }
+        });
+
+        /////////////HERE ACTIVITY /////////////////
+        //Simply returns the user to the login page.
+        here = (TextView) findViewById(R.id.logHereTV);
+        here.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
